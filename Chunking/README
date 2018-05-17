@@ -1,0 +1,17 @@
+Chunking is merely an extension of the POS tagging problem. Words in sentences can be considered similar to letters in the POS tagging problem.
+We will first define a chunk grammar, consisting of rules that indicate how sentences should be chunked.
+For example this "NP: {<DT>?<JJ>*<NN>}"## could be the grammar definition for a noun phrase.
+##: This rule says that an NP chunk should be formed whenever the chunker finds an optional determiner (DT) followed by any number of adjectives (JJ) and then a noun (NN).
+Like tokenization, which omits whitespace, chunking usually selects a subset of the tokens. Also like tokenization, the pieces produced by a chunker do not overlap in the source text.
+Since defining a new chunk for every chunk is cumbersome, we will use the logistic regression model again so that the system can itself define the grammar based on the training dataset.
+A thing to be noted is that chunks do not overlap, i.e. a word can only belong to one chunk at a given time.
+
+Features used in our code:
+1. POS tag of the previous word 2. POS tag of the current word
+3. POS of the next word
+4. Chunk tag of the previous word
+These features are then used to train and fit a logistic regression model. After this is used to predict the tags.
+
+
+With this set of features we get an accuracy of approximately 94%. (Screenshot attached below)
+NOTE: Due to processor constraints our code takes quite some time to run.
