@@ -1,0 +1,24 @@
+
+
+Please give the complete path after downloading the code.
+
+The MEMM or Maximum Entropy Markov Model tries to find the tag that makes the least amount of assumptions about the dataset. The lesser the assumptions, the higher the entropy is the basic principle.
+The MEMM is a sequence model adaptation of the MaxEnt (multino-mial logistic regression) classifier. This is a discriminative sequence model.
+In HMM we rely on Bayes Rule and the likelihood. But here we will compute the posterior directly.
+T’ = argmax P(T|W) = argmax ∏ P(ti|wi ,ti-1)
+where T: sequence of tags W: sequence of words
+TT
+Features in MEMM:
+As mentioned before if we were to consider just the two features of the previous word's tag and the crrent word, then it won't do much better than the HMM tagger. But being discriminative enables it to incorporate a larger pool of features better.
+MEMM taggers train logistic regression models to pick the best tag given an observation word, its context and the previous tags, and then use Viterbi to choose the best sequence of tags for the sentence.
+[5] Features used in our code:
+1. POS tag of the previous word.
+2. Previous word
+3. Current word
+4. Prefix of the word
+5. Suffix of the word
+6. Check if the word is uppercase or lowercase or a number or if the first letter is
+uppercase.
+These features are then used to train and fit a logistic regression model. After this is used to predict the tags.
+With this set of features we get an accuracy of approximately 77%. (Screenshot attached below)
+NOTE: Due to processor constraints our code takes quite some time to run.
